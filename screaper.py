@@ -33,4 +33,4 @@ def send_mail():
     server.quit()
 while(True):
     checkPrice()
-    time.sleep(60)
+    time.sleep(60*60) #Checks for every one hour
