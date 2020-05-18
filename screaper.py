@@ -20,13 +20,13 @@ def send_mail():
     server.ehlo()
     server.starttls()
     server.ehlo()
-    server.login('naganikhil1.bijjala@gmail.com','Nikhil@22')
+    server.login('xxx@gmail.com','password')
     subject = 'Price fell down'
     body = 'Check the amazon link https://www.amazon.in/Sony-ILCE-7M3K-Full-Frame-Mirrorless-Interchangeable/dp/B07DPSQRFF/ref=sr_1_1?dchild=1&keywords=sony+a7&qid=1589804165&sr=8-1'
     msg = f"Subject: {subject}\n\n{body}"
     server.sendmail(
-        'naganikhil1.bijjala@gmail.com',
-        'naganikhil.bijjala@gmail.com',
+        'sender@gmail.com',
+        'receiver@gmail.com',
         msg
     )
     print('HEY EMAIL HAS BEEN SENT')
