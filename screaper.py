@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 URL='https://www.amazon.in/Bourge-Vega-6-Running-Shoes-7-Vega-6-07/dp/B07TYCDKGT/ref=sr_1_1_sspa?dchild=1&keywords=shoes&qid=1589820631&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFHREtWUVVTOFhYSzQmZW5jcnlwdGVkSWQ9QTEwMjU3NDUzTVRYTkwyRjRRUFpaJmVuY3J5cHRlZEFkSWQ9QTEwMjgzMTUzMjRJRUg5REJMR0NNJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ=='
+desired_price=400
 headers = {"User-Agent": 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'}
 def checkPrice():
     page = requests.get(URL,headers=headers)
@@ -11,8 +12,16 @@ def checkPrice():
     # print(soup2.prettify())
     title = soup.find(id="productTitle").get_text()
     price = soup.find(id="priceblock_ourprice").get_text().strip()
-    converted_price = price[2:]
-    send_mail()
+    price = price[2:]
+    converted_price=''
+    for i in price:
+        if i==',':
+            continue
+        else:
+            converted_price += i
+    converted_price = float(converted_price)
+    if(desired_price<=converted_price):
+        send_mail()
     print(title.strip())
     print(converted_price)
 def send_mail():
